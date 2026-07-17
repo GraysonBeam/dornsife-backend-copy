@@ -1,0 +1,33 @@
+# Provides a local Postgres instance so we can run the backend locally. 
+#
+# Usage:
+#   Start:  docker compose up -d
+#   Stop:   docker compose down
+#   Wipe:   docker compose down -v   (destroys the named volume / all data)
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: dornsife-postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dornsife_db
+    ports:
+      # Host port 5433 maps to container port 5432.
+      # Using 5433 avoids collisions with any existing local Postgres installation.
+      - "5433:5432"
+    volumes:
+      # Named volume keeps data across container restarts.
+      - dornsife_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      # pg_isready exits 0 when the database is accepting connections.
+      # After `docker compose up -d`, run `docker compose ps` to confirm
+      # dornsife-postgres shows status "running (healthy)".
+      test: ["CMD-SHELL", "pg_isready -U user -d dornsife_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  dornsife_postgres_data:

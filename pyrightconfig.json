@@ -1,0 +1,17 @@
+{
+    "typeCheckingMode": "strict",
+    "stubPath": "stubs",
+    "venvPath": ".",
+    "venv": ".venv",
+    "include": ["."],
+    "exclude": [
+        "**/__pycache__",
+        "**/.venv",
+        "**/.pytest_cache",
+        "**/.ruff_cache",
+        "**/sql_schema"
+    ],
+    "reportMissingTypeStubs": "none",
+    "reportUnknownMemberType": "none",
+    "reportUnknownVariableType": "none"
+}

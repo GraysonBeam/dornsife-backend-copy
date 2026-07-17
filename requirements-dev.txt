@@ -1,0 +1,6 @@
+-r requirements.txt
+ruff>=0.14.0
+pytest>=9.0.0
+anyio==4.12.1
+httpx2>=0.1
+pyright>=1.1.408
