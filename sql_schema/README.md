@@ -1,0 +1,1 @@
+This is the SQL schema folder
